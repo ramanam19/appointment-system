@@ -1,0 +1,123 @@
+{% extends 'appointment/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<!-- =======================
+     HERO SECTION
+======================= -->
+<div class="container mt-5">
+    <div class="p-5 text-center text-white shadow-lg"
+         style="
+            border-radius: 15px;
+            background: linear-gradient(
+                to bottom right,
+                rgba(0, 77, 64, 0.92),
+                rgba(0, 121, 107, 0.92)
+            );
+         ">
+
+        <h1 class="display-4 fw-bold mb-3">Appointment Scheduling System</h1>
+
+        <p class="lead mb-4">
+            Book appointments with ease. Track and manage your schedule anywhere, anytime.
+        </p>
+
+        <div class="d-flex justify-content-center gap-3">
+
+            <a href="{% url 'login_user' %}" class="btn btn-light btn-lg px-4">
+                <i class="bi bi-box-arrow-in-right"></i> User Login
+            </a>
+
+            <a href="{% url 'register_user' %}" class="btn btn-outline-light btn-lg px-4">
+                <i class="bi bi-person-plus"></i> Register
+            </a>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- =======================
+     FEATURES SECTION
+======================= -->
+<div class="container mt-5">
+
+    <div class="text-center mb-4">
+        <h2 class="fw-bold">Why Choose Our System?</h2>
+        <p class="text-muted">Fast, simple, and reliable appointment management</p>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="card shadow-sm p-4 text-center h-100">
+                <i class="bi bi-calendar-date fs-1 text-success mb-3"></i>
+                <h5 class="fw-bold">Easy Booking</h5>
+                <p class="text-muted">
+                    Book appointments in a few clicks with real-time slot availability.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm p-4 text-center h-100">
+                <i class="bi bi-bell fs-1 text-primary mb-3"></i>
+                <h5 class="fw-bold">Smart Notifications</h5>
+                <p class="text-muted">
+                    Get reminders and notifications to stay on schedule effortlessly.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm p-4 text-center h-100">
+                <i class="bi bi-shield-check fs-1 text-danger mb-3"></i>
+                <h5 class="fw-bold">Secure Data</h5>
+                <p class="text-muted">
+                    Your information is safely stored with authenticated access.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =======================
+     CTA SECTION
+======================= -->
+<div class="container text-center my-5">
+    <div class="p-4 shadow rounded"
+         style="background-color: rgba(255,255,255,0.8);">
+        <h3 class="fw-bold mb-3">Ready to Get Started?</h3>
+        <p class="text-muted mb-4">Create an account or log in now to begin booking appointments.</p>
+
+        <a href="{% url 'login_user' %}"
+           class="btn btn-success btn-lg px-4 mx-2">
+            Login
+        </a>
+
+        <a href="{% url 'register_user' %}"
+           class="btn btn-outline-success btn-lg px-4 mx-2">
+            Register
+        </a>
+    </div>
+</div>
+
+
+<!-- =======================
+     FOOTER SECTION
+======================= -->
+<footer class="mt-5 text-center text-white py-3"
+        style="background: rgba(0, 77, 64, 0.9); border-radius: 10px;">
+
+    <p class="mb-0">
+        &copy; {{ now|date:"Y" }} Appointment Scheduling System — All Rights Reserved.
+    </p>
+
+</footer>
+
+{% endblock %}

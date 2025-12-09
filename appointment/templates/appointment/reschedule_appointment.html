@@ -1,0 +1,31 @@
+{% extends 'appointment/base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card shadow p-4 mx-auto" style="max-width: 450px; background:white; border-radius:10px;">
+        <h3 class="text-center mb-4">Reschedule Appointment</h3>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <label class="form-label">Select New Date</label>
+            <input type="date" name="date" class="form-control"
+                min="{{ today }}" required>
+
+            <label class="form-label mt-3">Select New Time</label>
+            <select name="time" class="form-select" required>
+                <option disabled selected value="">-- Choose Time --</option>
+                {% for slot in available_slots %}
+                    <option value="{{ slot|time:'H:i' }}">
+                        {{ slot|time:"g:i A" }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <button class="btn btn-warning w-100 mt-4">Update Appointment</button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

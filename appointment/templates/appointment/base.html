@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Appointment System{% endblock %}</title>
+
+    {% load static %}
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet"
+          href="{% static 'css/styles.css' %}">
+
+    <style>
+        /* ---------- Background ---------- */
+        body {
+            background: url("{% static 'images/bg_image.jpg' %}") center center / cover no-repeat fixed;
+            font-family: 'Verdana', sans-serif;
+            min-height: 100vh;
+            color: #2c3e50;
+        }
+
+        /* ---------- Navbar ---------- */
+        .navbar {
+            background-color: #005f5f !important;
+        }
+        .navbar .nav-link {
+            color: #ffffff !important;
+        }
+        .navbar .nav-link:hover {
+            color: #ffbb33 !important;
+        }
+
+        /* ---------- Form Fields ---------- */
+        input, select, textarea {
+            font-size: 14px;
+            border-radius: 5px;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #005f5f;
+            box-shadow: none;
+        }
+
+        /* ---------- Cards ---------- */
+        .card {
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        /* ---------- Buttons ---------- */
+        .btn-primary-custom {
+            background-color: #005f5f;
+            color: white;
+        }
+        .btn-primary-custom:hover {
+            background-color: #003c3c;
+        }
+
+        /* ---------- Messages ---------- */
+        .alert {
+            border-radius: 8px;
+            margin-bottom: 20px;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-dismissible .btn-close {
+            padding: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar Based on User Access -->
+    {% if user.is_authenticated %}
+        {% if user.is_staff %}
+            {% include 'appointment/admin_nav.html' %}
+        {% else %}
+            {% include 'appointment/user_nav.html' %}
+        {% endif %}
+    {% else %}
+        {% include 'appointment/homepage_nav.html' %}
+    {% endif %}
+
+    <!-- Main Container -->
+    <div class="container mt-4">
+        
+        <!-- Django Messages Display -->
+        {% if messages %}
+            <div class="messages-container">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {% if message.tags == 'success' %}
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                        {% elif message.tags == 'error' %}
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        {% elif message.tags == 'warning' %}
+                            <i class="bi bi-exclamation-circle-fill me-2"></i>
+                        {% elif message.tags == 'info' %}
+                            <i class="bi bi-info-circle-fill me-2"></i>
+                        {% endif %}
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Auto-dismiss alerts after 5 seconds -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto dismiss alerts after 5 seconds
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                setTimeout(function() {
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                }, 5000);
+            });
+        });
+    </script>
+
+</body>
+</html>

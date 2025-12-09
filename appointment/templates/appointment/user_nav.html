@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg bg-white shadow-sm"
+     style="border-bottom: 2px solid #e5e5e5;">
+    <div class="container">
+
+        <!-- Brand -->
+        <a class="navbar-brand fw-bold text-primary" href="{% url 'dashboard_user' %}">
+            <i class="bi bi-person-circle"></i> User Dashboard
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarUser" aria-controls="navbarUser"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible Navbar Content -->
+        <div class="collapse navbar-collapse" id="navbarUser">
+
+            <!-- Left Menu -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <!-- Dashboard Home -->
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'dashboard_user' %}active fw-bold{% endif %}"
+                       href="{% url 'dashboard_user' %}">
+                        <i class="bi bi-house-door"></i> Home
+                    </a>
+                </li>
+
+                <!-- My Appointments -->
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'my_appointments' %}active fw-bold{% endif %}"
+                       href="{% url 'my_appointments' %}">
+                        <i class="bi bi-calendar-check"></i> My Appointments
+                    </a>
+                </li>
+
+            </ul>
+
+            <!-- Right Menu -->
+            <ul class="navbar-nav ms-auto align-items-center">
+
+                <li class="nav-item me-2">
+                    <span class="nav-link text-dark">
+                        <i class="bi bi-person"></i> {{ user.username }}
+                    </span>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-danger text-white px-3"
+                       href="{% url 'logout' %}">
+                       <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+</nav>

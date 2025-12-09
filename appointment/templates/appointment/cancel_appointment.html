@@ -1,0 +1,20 @@
+{% extends 'appointment/base.html' %}
+
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow p-4 mx-auto" style="max-width: 500px;">
+        <h3 class="text-center mb-4">❌ Cancel Appointment</h3>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="appointment_id" class="form-label">Appointment ID</label>
+                <input type="text" name="appointment_id" id="appointment_id" class="form-control" placeholder="Enter Appointment ID" required>
+            </div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-danger px-4">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

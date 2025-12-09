@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-3">
+    <div class="container-fluid">
+
+        <!-- Brand -->
+        <a class="navbar-brand fw-bold text-primary" href="{% url 'dashboard_admin' %}">
+            <i class="bi bi-speedometer2"></i> Admin Panel
+        </a>
+
+        <!-- Mobile Toggle -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                data-bs-target="#navbarAdmin" aria-controls="navbarAdmin" 
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Nav Items -->
+        <div class="collapse navbar-collapse" id="navbarAdmin">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <!-- Dashboard Home -->
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'dashboard_admin' %}active fw-bold{% endif %}" 
+                       href="{% url 'dashboard_admin' %}">
+                        <i class="bi bi-house-door"></i> Dashboard Home
+                    </a>
+                </li>
+
+                <!-- View All Appointments -->
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'view_all_appointments' %}active fw-bold{% endif %}"
+                       href="{% url 'view_all_appointments' %}">
+                        <i class="bi bi-calendar-check"></i> All Appointments
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Right Side -->
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <span class="nav-link text-secondary">
+                        <i class="bi bi-person-circle"></i> {{ user.username }}
+                    </span>
+                </li>
+
+                <li class="nav-item">
+                    <a class="btn btn-outline-danger ms-2" href="{% url 'logout' %}">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,114 @@
+{% extends 'appointment/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<style>
+    .admin-card {
+        border-radius: 12px;
+        padding: 25px;
+        transition: 0.3s ease;
+    }
+    .admin-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .dashboard-icon {
+        font-size: 2.5rem;
+        color: #004d40;
+    }
+
+    .stat-box {
+        padding: 20px;
+        border-radius: 12px;
+        background: #ffffff;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: 0.3s ease;
+    }
+
+    .stat-box:hover {
+        transform: translateY(-4px);
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #004d40;
+    }
+
+    .stat-label {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #555;
+    }
+</style>
+
+<div class="container mt-5 mb-4">
+
+    <h2 class="text-center fw-bold mb-4 text-primary">
+        <i class="bi bi-speedometer2"></i> Admin Dashboard
+    </h2>
+
+   
+    <div class="row text-center mb-5">
+
+        <div class="col-md-4 mb-3">
+            <div class="stat-box">
+                <div class="stat-number">{{ total }}</div>
+                <div class="stat-label">Total Appointments</div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="stat-box">
+                <div class="stat-number">{{ active }}</div>
+                <div class="stat-label">Active Appointments</div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="stat-box">
+                <div class="stat-number text-danger">{{ cancelled }}</div>
+                <div class="stat-label">Cancelled Appointments</div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <div class="col-md-6 mb-4">
+            <a href="{% url 'view_all_appointments' %}" class="text-decoration-none text-dark">
+                <div class="admin-card bg-white shadow-sm">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-calendar-check dashboard-icon me-3"></i>
+                        <div>
+                            <h5 class="fw-bold">View All Appointments</h5>
+                            <p class="mb-0 text-muted">See every scheduled appointment.</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <a href="{% url 'logout' %}" class="text-decoration-none">
+                <div class="admin-card bg-white shadow-sm">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-box-arrow-right dashboard-icon text-danger me-3"></i>
+                        <div>
+                            <h5 class="fw-bold text-danger">Logout</h5>
+                            <p class="mb-0 text-muted">Sign out of the admin panel.</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

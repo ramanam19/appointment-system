@@ -1,0 +1,72 @@
+{% extends 'appointment/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<style>
+  body {
+    background-color: #f0f4f8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .cancel-badge {
+    background: rgba(255, 0, 0, 0.1);
+    color: #d60000;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: bold;
+  }
+</style>
+
+<div class="container mt-5">
+
+  <h2 class="mb-4 text-center text-primary">
+    <i class="bi bi-list-check"></i> My Appointments
+  </h2>
+
+  <!-- Success messages -->
+
+  {% if appointments %}
+      {% for appt in appointments %}
+      <div class="card mb-4 position-relative shadow-sm p-4 bg-white rounded-4">
+
+          {% if appt.status == "cancelled" %}
+              <div class="position-absolute top-0 end-0 m-2 cancel-badge">
+                  Appointment Cancelled
+              </div>
+          {% endif %}
+
+          <p class="mb-2">
+              <i class="bi bi-person-fill me-1"></i> 
+              <strong>{{ appt.name }}</strong> (Age: {{ appt.age }})
+          </p>
+
+          <p class="mb-2">
+              <i class="bi bi-calendar-event me-1"></i> 
+              <strong>{{ appt.date|date:"F d, Y" }}</strong> 
+              &nbsp;
+              <i class="bi bi-clock me-1"></i> 
+              <strong>{{ appt.time|time:"g:i A" }}</strong>
+          </p>
+
+          <p class="mb-3 text-muted">{{ appt.description }}</p>
+
+          
+          {% if appt.status != "cancelled" and appt.status != "rejected" %}
+              <a href="{% url 'reschedule_appointment' appt.id %}"
+                 class="btn btn-warning btn-sm">
+                 <i class="bi bi-calendar2-week"></i> Reschedule
+              </a>
+          {% endif %}
+
+      </div>
+      {% endfor %}
+  {% else %}
+      <div class="alert alert-info text-center">
+          <i class="bi bi-info-circle"></i> No appointments scheduled.
+      </div>
+  {% endif %}
+</div>
+
+{% endblock %}
