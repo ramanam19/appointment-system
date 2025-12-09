@@ -150,4 +150,4 @@ MESSAGE_TAGS = {
 }
 
 # Add CSRF trusted origins
-CSRF_TRUSTED_ORIGINS = ['https://yourusername.pythonanywhere.com']
+CSRF_TRUSTED_ORIGINS = ['https://kartik1910.pythonanywhere.com']
